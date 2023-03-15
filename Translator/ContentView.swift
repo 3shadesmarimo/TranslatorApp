@@ -3,7 +3,7 @@
 //  Translator
 //
 //  Created by Bilegt Davaa on 2023-03-15.
-//
+//  And Nav
 
 import SwiftUI
 
