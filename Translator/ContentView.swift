@@ -8,13 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    let translator = Translator(key: "714c72d008d74750aecaafdda23d58ee", endpoint: "https://api.cognitive.microsofttranslator.com", location: "westus2")
+    
     @State var textfieldText: String = ""
     @State var textfieldText2 : String = ""
-    @State var selectedOption = 0
-    @State var selectedOption2 = 0
+    @State var selectedOption = "en"
+    @State var selectedOption2 = "en"
     
-    let options = ["English", "French", "Spanish", "Chinese"]
-    let options2 = ["English", "French", "Russia", "Chinese"]
+    @State var fromLanguage = ""
+    @State var toLanguage = ""
+    
+    let options = ["en", "fr", "es"]
+    let options2 = ["en", "fr", "es"]
     
     var body: some View {
         
@@ -24,7 +30,7 @@ struct ContentView: View {
                 HStack{
                     Text("From:")
                         .font(.title3)
-                    Spacer().frame(width: 250)
+                    Spacer().frame(width: 200)
                     Text("To:")
                         .font(.title3)
                 }
@@ -33,15 +39,20 @@ struct ContentView: View {
                          
                         
                     Picker(selection: $selectedOption, label: Text("Select language")){
-                        ForEach(0..<options.count){
-                            index in Text(options[index]).tag(index)
+                        ForEach(options, id: \.self){ option in
+                            Text(option)
+                            
+                            
                         }
                         .frame(height: 50)
                     }
+                    
+                
                     Spacer().frame(width: 150)
+                    
+                    
                     Picker(selection: $selectedOption2, label: Text("Select language")){
-                        ForEach(0..<options2.count){
-                            index in Text(options2[index]).tag(index)
+                        ForEach(options2, id :\.self){ option in Text(option)
                         }
                         .frame(height: 50)
                     }
@@ -61,11 +72,22 @@ struct ContentView: View {
                     .frame(height: 120)
                     .padding()
                     .background(Color.gray.opacity(0.3).cornerRadius(10))
+                    //.disabled(true)
                 
                 Spacer().frame(height: 40)
                     
                 
                 Button(action: {
+                    translator.translate(text: textfieldText, from: selectedOption, to: [selectedOption2]) { result, error in
+                        DispatchQueue.main.async {
+                            if let result = result {
+                                textfieldText2 = result
+                            } else{
+                                textfieldText2 = "Translation failed. Please try again."
+                            }
+                        }
+                        
+                    }
                     
                 }, label: {
                     Text("Translate")
@@ -79,12 +101,13 @@ struct ContentView: View {
             .navigationTitle("Translator App")
         }
         
-        
-       
-            
-        
     }
+    
 }
+
+
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
