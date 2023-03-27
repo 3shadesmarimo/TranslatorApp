@@ -6,8 +6,11 @@
 //  And Nav hehe
 
 import SwiftUI
+import SwiftUICharts
 
 struct ContentView: View {
+    @AppStorage("isDarkModeOn") private var isDarkModeOn = false
+    
     
     let translator = Translator(key: "714c72d008d74750aecaafdda23d58ee", endpoint: "https://api.cognitive.microsofttranslator.com", location: "westus2")
     
@@ -16,17 +19,17 @@ struct ContentView: View {
     @State var selectedOption = "en"
     @State var selectedOption2 = "en"
     
-    @State var fromLanguage = ""
-    @State var toLanguage = ""
     
-    let options = ["en", "fr", "es"]
-    let options2 = ["en", "fr", "es"]
+    let options = ["ar","en", "fr", "es", "pa", "ro", "mn", "ru", "uk", "ja", "hi", "el", "zh-Hans"]
+    let options2 = ["ar","en", "fr", "es", "pa", "ro", "mn", "ru", "uk", "ja", "hi", "el", "zh-Hans"]
     
     var body: some View {
         
+        
         NavigationView{
-            
             VStack {
+                
+                
                 HStack{
                     Text("From:")
                         .font(.title3)
@@ -36,8 +39,8 @@ struct ContentView: View {
                 }
                 
                 HStack {
-                         
-                        
+                    
+                    
                     Picker(selection: $selectedOption, label: Text("Select language")){
                         ForEach(options, id: \.self){ option in
                             Text(option)
@@ -47,7 +50,7 @@ struct ContentView: View {
                         .frame(height: 50)
                     }
                     
-                
+                    
                     Spacer().frame(width: 150)
                     
                     
@@ -60,7 +63,7 @@ struct ContentView: View {
                 }
                 
                 TextField("Type something to translate...", text: $textfieldText)
-                    //.textFieldStyle(RoundedBorderTextFieldStyle())
+                //.textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(height: 120)
                     .padding()
                     .background(Color.gray.opacity(0.3).cornerRadius(10))
@@ -68,14 +71,14 @@ struct ContentView: View {
                 Spacer().frame(height: 40)
                 
                 TextField("Translated text...", text: $textfieldText2)
-                    //.textFieldStyle(RoundedBorderTextFieldStyle())
+                //.textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(height: 120)
                     .padding()
                     .background(Color.gray.opacity(0.3).cornerRadius(10))
-                    //.disabled(true)
+                //.disabled(true)
                 
                 Spacer().frame(height: 40)
-                    
+                
                 
                 Button(action: {
                     translator.translate(text: textfieldText, from: selectedOption, to: [selectedOption2]) { result, error in
@@ -97,9 +100,19 @@ struct ContentView: View {
                         .foregroundColor(.white)
                 })
             }
-            .padding()
             .navigationTitle("Translator App")
+            .padding()
+            .toolbar{
+                ToolbarItem(placement: ToolbarItemPlacement .navigationBarTrailing){
+                Button(action: {isDarkModeOn.toggle()}, label: {
+                    isDarkModeOn ? Label("Dark", systemImage: "lightbulb.fill") : Label("Dark", systemImage: "lightbulb")
+                })
+                }
+            }
+            
         }
+        .environment(\.colorScheme, isDarkModeOn ? .dark : .light)
+        
         
     }
     
@@ -112,5 +125,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+        
     }
 }

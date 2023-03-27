@@ -12,6 +12,7 @@
 		BDBF4A3B29C2559C00907AAE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBF4A3A29C2559C00907AAE /* ContentView.swift */; };
 		BDBF4A3D29C2559E00907AAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDBF4A3C29C2559E00907AAE /* Assets.xcassets */; };
 		BDBF4A4029C2559E00907AAE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDBF4A3F29C2559E00907AAE /* Preview Assets.xcassets */; };
+		BDD34B5529D16948006CFF20 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = BDD34B5429D16948006CFF20 /* SwiftUICharts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDD34B5529D16948006CFF20 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +88,9 @@
 			dependencies = (
 			);
 			name = Translator;
+			packageProductDependencies = (
+				BDD34B5429D16948006CFF20 /* SwiftUICharts */,
+			);
 			productName = Translator;
 			productReference = BDBF4A3529C2559C00907AAE /* Translator.app */;
 			productType = "com.apple.product-type.application";
@@ -114,6 +119,9 @@
 				Base,
 			);
 			mainGroup = BDBF4A2C29C2559C00907AAE;
+			packageReferences = (
+				BDD34B5329D16948006CFF20 /* XCRemoteSwiftPackageReference "ChartView" */,
+			);
 			productRefGroup = BDBF4A3629C2559C00907AAE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -343,6 +351,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BDD34B5329D16948006CFF20 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = exactVersion;
+				version = "2.0.0-beta.2";
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BDD34B5429D16948006CFF20 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BDD34B5329D16948006CFF20 /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BDBF4A2D29C2559C00907AAE /* Project object */;
 }
