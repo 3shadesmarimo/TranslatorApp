@@ -14,6 +14,9 @@
 		BDBF4A4029C2559E00907AAE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDBF4A3F29C2559E00907AAE /* Preview Assets.xcassets */; };
 		BDD34B5529D16948006CFF20 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = BDD34B5429D16948006CFF20 /* SwiftUICharts */; };
 		BDD34B8629E5084C006CFF20 /* TranslatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD34B8529E5084C006CFF20 /* TranslatorTests.swift */; };
+		BDD34B8829E71394006CFF20 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD34B8729E71394006CFF20 /* HistoryView.swift */; };
+		BDD34B8B29E72534006CFF20 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = BDD34B8A29E72534006CFF20 /* Alamofire */; };
+		BDD34B8D29E72B06006CFF20 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD34B8C29E72B06006CFF20 /* Language.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,8 @@
 		BDBF4A3C29C2559E00907AAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BDBF4A3F29C2559E00907AAE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BDD34B8529E5084C006CFF20 /* TranslatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorTests.swift; sourceTree = "<group>"; };
+		BDD34B8729E71394006CFF20 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		BDD34B8C29E72B06006CFF20 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +37,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDD34B5529D16948006CFF20 /* SwiftUICharts in Frameworks */,
+				BDD34B8B29E72534006CFF20 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +66,8 @@
 				BDBF4A3829C2559C00907AAE /* TranslatorApp.swift */,
 				BDBF4A3A29C2559C00907AAE /* ContentView.swift */,
 				BD11EB9E29CB48FF006509C0 /* Translator.swift */,
+				BDD34B8729E71394006CFF20 /* HistoryView.swift */,
+				BDD34B8C29E72B06006CFF20 /* Language.swift */,
 				BDD34B8529E5084C006CFF20 /* TranslatorTests.swift */,
 				BDBF4A3C29C2559E00907AAE /* Assets.xcassets */,
 				BDBF4A3E29C2559E00907AAE /* Preview Content */,
@@ -93,6 +101,7 @@
 			name = Translator;
 			packageProductDependencies = (
 				BDD34B5429D16948006CFF20 /* SwiftUICharts */,
+				BDD34B8A29E72534006CFF20 /* Alamofire */,
 			);
 			productName = Translator;
 			productReference = BDBF4A3529C2559C00907AAE /* Translator.app */;
@@ -124,6 +133,7 @@
 			mainGroup = BDBF4A2C29C2559C00907AAE;
 			packageReferences = (
 				BDD34B5329D16948006CFF20 /* XCRemoteSwiftPackageReference "ChartView" */,
+				BDD34B8929E72534006CFF20 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = BDBF4A3629C2559C00907AAE /* Products */;
 			projectDirPath = "";
@@ -153,6 +163,8 @@
 			files = (
 				BDBF4A3B29C2559C00907AAE /* ContentView.swift in Sources */,
 				BDD34B8629E5084C006CFF20 /* TranslatorTests.swift in Sources */,
+				BDD34B8829E71394006CFF20 /* HistoryView.swift in Sources */,
+				BDD34B8D29E72B06006CFF20 /* Language.swift in Sources */,
 				BD11EB9F29CB48FF006509C0 /* Translator.swift in Sources */,
 				BDBF4A3929C2559C00907AAE /* TranslatorApp.swift in Sources */,
 			);
@@ -365,6 +377,14 @@
 				version = "2.0.0-beta.2";
 			};
 		};
+		BDD34B8929E72534006CFF20 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -372,6 +392,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BDD34B5329D16948006CFF20 /* XCRemoteSwiftPackageReference "ChartView" */;
 			productName = SwiftUICharts;
+		};
+		BDD34B8A29E72534006CFF20 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BDD34B8929E72534006CFF20 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

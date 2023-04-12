@@ -12,16 +12,20 @@ struct ContentView: View {
     @AppStorage("isDarkModeOn") private var isDarkModeOn = false
     
     
-    let translator = Translator(key: "714c72d008d74750aecaafdda23d58ee", endpoint: "https://api.cognitive.microsofttranslator.com", location: "westus2")
+    let translator = Translator(key: "b45b4f0dc87f4671b0c83b49d0407403", endpoint: "https://api.cognitive.microsofttranslator.com", location: "eastus")
     
     @State var textfieldText: String = ""
     @State var textfieldText2 : String = ""
-    @State var selectedOption = "en"
-    @State var selectedOption2 = "en"
+    @State var selectedOption = Language.english
+    @State var selectedOption2 = Language.english
+
+    @State private var translations: [(fromText: String, toText: String)] = []
     
     
-    let options = ["ar","en", "fr", "es", "pa", "ro", "mn", "ru", "uk", "ja", "hi", "el", "zh-Hans"]
-    let options2 = ["ar","en", "fr", "es", "pa", "ro", "mn", "ru", "uk", "ja", "hi", "el", "zh-Hans"]
+    let options = Language.allCases.map { $0.name }
+
+    let options2 = Language.allCases.map { $0.name }
+
     
     var body: some View {
         
@@ -42,23 +46,24 @@ struct ContentView: View {
                     
                     
                     Picker(selection: $selectedOption, label: Text("Select language")){
-                        ForEach(options, id: \.self){ option in
-                            Text(option)
-                            
-                            
+                        ForEach(Language.allCases, id: \.self){ option in
+                            Text(option.name).tag(option.rawValue)
                         }
                         .frame(height: 50)
                     }
+
                     
                     
                     Spacer().frame(width: 150)
                     
                     
                     Picker(selection: $selectedOption2, label: Text("Select language")){
-                        ForEach(options2, id :\.self){ option in Text(option)
+                        ForEach(Language.allCases, id: \.self){ option in
+                            Text(option.name).tag(option.rawValue)
                         }
                         .frame(height: 50)
                     }
+
                     
                 }
                 
@@ -81,16 +86,35 @@ struct ContentView: View {
                 
                 
                 Button(action: {
+                    
+                    //this is using the translate1 method
+                    translator.translate1(text: textfieldText, to: [selectedOption2.rawValue]) { result, error in
+                        DispatchQueue.main.async {
+                            if let result = result {
+                                textfieldText2 = result
+                                translations.append((fromText: textfieldText, toText: result))
+                            } else {
+                                textfieldText2 = "Translation failed. Please try again"
+                            }
+                        }
+                    }
+
+                    
+                    
+                    //the code below is an implentation where it doesn't recognize the source language
+                    /*
                     translator.translate(text: textfieldText, from: selectedOption, to: [selectedOption2]) { result, error in
                         DispatchQueue.main.async {
                             if let result = result {
                                 textfieldText2 = result
+                                translations.append((fromText: textfieldText, toText: result))
                             } else{
                                 textfieldText2 = "Translation failed. Please try again."
                             }
                         }
                         
                     }
+                    */
                     
                 }, label: {
                     Text("Translate")
@@ -102,7 +126,14 @@ struct ContentView: View {
             }
             .navigationTitle("Translator App")
             .padding()
-            .toolbar{
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading){
+                    NavigationLink(destination: HistoryView(translations: translations, textfieldText: $textfieldText, textfieldText2: $textfieldText2)) {
+                        Label("History", systemImage: "list.bullet.circle")
+                    }
+                    
+                }
+                
                 ToolbarItem(placement: ToolbarItemPlacement .navigationBarTrailing){
                 Button(action: {isDarkModeOn.toggle()}, label: {
                     isDarkModeOn ? Label("Dark", systemImage: "lightbulb.fill") : Label("Dark", systemImage: "lightbulb")
