@@ -1,6 +1,5 @@
 # Translator
 
-A translator app using SwiftUI and Microsoft Azure. Also includes dark mode that is being toggled.
+A translator app using SwiftUI and Microsoft Azure's Translator Resource. 
 
-
-<img width="372" alt="Screenshot 2023-03-27 at 3 18 11 AM" src="https://user-images.githubusercontent.com/96280882/227868626-dfdf78d6-b0f7-4c8a-abdb-36ed37fe6f7a.png"> <img width="365" alt="Screenshot 2023-03-27 at 3 18 17 AM" src="https://user-images.githubusercontent.com/96280882/227868677-987b5294-d859-426c-8659-4984a6438893.png">
+<img width="1131" alt="Screenshot 2023-04-17 at 5 21 26 PM" src="https://user-images.githubusercontent.com/96280882/232613612-9034a76b-ad4a-4d5e-a33c-fb8de2026963.png">
