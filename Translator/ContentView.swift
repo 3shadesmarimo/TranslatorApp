@@ -10,9 +10,7 @@ import SwiftUICharts
 
 struct ContentView: View {
     @AppStorage("isDarkModeOn") private var isDarkModeOn = false
-    
-    
-    let translator = Translator(key: "b45b4f0dc87f4671b0c83b49d0407403", endpoint: "https://api.cognitive.microsofttranslator.com", location: "eastus")
+        
     
     @State var textfieldText: String = ""
     @State var textfieldText2 : String = ""
@@ -21,11 +19,12 @@ struct ContentView: View {
 
     @State private var translations: [(fromText: String, toText: String)] = []
     
+    @State private var translator: Translator?
     
     let options = Language.allCases.map { $0.name }
-
     let options2 = Language.allCases.map { $0.name }
-
+    
+    
     
     var body: some View {
         
@@ -86,6 +85,19 @@ struct ContentView: View {
                 
                 
                 Button(action: {
+                    
+                    if let apiKey = ProcessInfo.processInfo.environment["TRANSLATOR_API_KEY"] {
+                        let translator = Translator(key: apiKey, endpoint: "https://api.cognitive.microsofttranslator.com", location: "eastus")
+                        self.translator = translator // assign the new instance of Translator to the @State property
+                    } else {
+                        print("TRANSLATOR_API_KEY environment variable not set")
+                        return // return early if the API key is not set
+                    }
+                    
+                    guard let translator = self.translator else {
+                        print("Translator is nil")
+                        return // return early if translator is nil
+                    }
                     
                     //this is using the translate1 method
                     translator.translate1(text: textfieldText, to: [selectedOption2.rawValue]) { result, error in
